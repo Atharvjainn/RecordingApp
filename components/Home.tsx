@@ -9,7 +9,7 @@ export default function Home() {
 
         <h1 className="text-[clamp(42px,6vw,72px)] font-extrabold leading-tight">
           Record.{" "}
-          <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+          <span className="bg-linear-to-br from-primary to-secondary bg-clip-text text-transparent">
             Share.
           </span>
           <br />
@@ -24,7 +24,7 @@ export default function Home() {
         <div className="mt-10 flex justify-center gap-4 flex-wrap">
           <a
             href="#"
-            className="px-7 py-4 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white font-semibold text-lg shadow-lg"
+            className="px-7 py-4 rounded-2xl bg-linear-to-br from-primary to-secondary text-white font-semibold text-lg shadow-lg"
           >
             Get Started Free →
           </a>

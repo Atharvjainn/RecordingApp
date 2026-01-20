@@ -45,3 +45,10 @@ export const signInSocial = async(provider : 'google' | 'github') => {
     }
 }
 
+export const getcurrentUser = async() => {
+    const session = await auth.api.getSession({
+        headers : await headers()
+    })
+    return session?.user
+}
+
