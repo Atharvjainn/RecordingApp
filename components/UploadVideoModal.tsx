@@ -1,6 +1,5 @@
 'use client';
 
-import { uploadVideo } from "@/lib/actions/cloudinary-actions";
 import { uploadVideoToCloudinary } from "@/lib/actions/cloudinary-client";
 import React, { useState } from "react";
 

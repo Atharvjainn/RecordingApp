@@ -9,12 +9,23 @@ import {
   Clock,
   Calendar
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadVideoModal from "./UploadVideoModal";
+import { useVideoStore } from "@/store/useVideoStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function Dashboard() {
-  const videos = Array.from({ length: 6 });
+  // const videos = Array.from({ length: 6 });
   const [open,setOpen] = useState(false)
+  const {videos,getvideos} = useVideoStore()
+  const {authUser,isCheckingAuth} = useAuthStore()
+
+  useEffect(() => {
+    if(authUser && !isCheckingAuth)  getvideos()
+  },[getvideos,authUser,isCheckingAuth])
+
+  
+  
 
   return (
     <main className="px-8 py-10">
@@ -84,30 +95,24 @@ export default function Dashboard() {
 
       {/* VIDEO GRID */}
       <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {videos.map((_, i) => (
+        {videos.map((video, i) => (
           <div
             key={i}
             className="rounded-2xl overflow-hidden border shadow-sm hover:shadow-lg transition bg-white"
           >
             {/* THUMBNAIL */}
-            <div className="relative h-44 bg-slate-200">
-              <span className="absolute bottom-3 right-3 flex items-center gap-1 px-2 py-1 rounded-lg bg-black/80 text-white text-xs">
+            
+              <img src={video.thumbnailUrl} className="relative" alt="" />
+              {/* <span className="absolute bottom-3 right-3 flex items-center gap-1 px-2 py-1 rounded-lg bg-black/80 text-white text-xs">
                 <Clock size={12} />
                 {["5:32", "45:18", "12:05", "8:20", "6:42", "9:10"][i]}
-              </span>
-            </div>
+              </span> */}
+            
 
             {/* CONTENT */}
             <div className="p-4 space-y-2">
               <h3 className="font-semibold leading-snug">
-                {[
-                  "Product Demo – New Dashboard Features",
-                  "Team Meeting Recording – Q1 Planning",
-                  "Tutorial: Getting Started with RecordFlow",
-                  "Client Walkthrough – Feature Overview",
-                  "Weekly Sync – Engineering Team",
-                  "Marketing Review – Campaign Results",
-                ][i]}
+                {video.title}
               </h3>
 
               <div className="flex items-center gap-2 text-sm text-slate-500">
