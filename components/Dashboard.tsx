@@ -9,12 +9,16 @@ import {
   Clock,
   Calendar
 } from "lucide-react";
+import { useState } from "react";
+import UploadVideoModal from "./UploadVideoModal";
 
 export default function Dashboard() {
   const videos = Array.from({ length: 6 });
+  const [open,setOpen] = useState(false)
 
   return (
     <main className="px-8 py-10">
+      <UploadVideoModal isOpen={open} onClose={() => setOpen(false)} />
       {/* RECORD ACTIONS */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#f2efff] to-[#f7f4ff] border cursor-pointer hover:shadow-md transition">
@@ -28,6 +32,19 @@ export default function Dashboard() {
             </p>
           </div>
         </div>
+
+        <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#fff0f7] to-[#fff6fb] border cursor-pointer hover:shadow-md transition" onClick={() => setOpen(true)}>
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-primary grid place-items-center text-white">
+            <Camera />
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg">Upload Video</h3>
+            <p className="text-slate-500 text-sm">
+             Upload Video
+            </p>
+          </div>
+        </div>
+
 
         <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#fff0f7] to-[#fff6fb] border cursor-pointer hover:shadow-md transition">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-primary grid place-items-center text-white">

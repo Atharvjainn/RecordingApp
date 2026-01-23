@@ -7,3 +7,20 @@ export interface User {
     createdAt : Date,
     updatedAt : Date
 }
+
+type Visibility = 'public' | 'private' 
+
+export interface Video {
+    id : string,
+    title : string,
+    description : string,
+    videoId : string,
+    videoUrl : string,
+    thumbnailUrl : string,
+    visibility : Visibility,
+    duration : number,
+    createdAt : Date,
+    updatedAt : Date,
+    userId : string
+
+}

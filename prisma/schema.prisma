@@ -23,6 +23,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  videos        Video[]
 
   @@unique([email])
   @@map("user")
@@ -74,4 +75,27 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Video {
+  id           String     @id @default(uuid()) @db.Uuid
+  title        String
+  description  String
+  videoUrl     String
+  videoId      String
+  thumbnailUrl String
+  visibility   Visibility
+  duration     Int?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("videos")
+}
+
+enum Visibility {
+  public
+  private
 }
