@@ -39,6 +39,8 @@ export default function UploadVideoModal({
         });
         
         if (!res.ok) {
+          console.log(res);
+          
         alert('Failed to save video');
          return;
         }

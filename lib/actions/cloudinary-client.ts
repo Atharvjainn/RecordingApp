@@ -16,8 +16,11 @@ export const uploadVideoToCloudinary = async (file: File) => {
       body: formData,
     }
   );
+  
 
   if (!res.ok) {
+    const text = await res.text();
+    console.error('Cloudinary response:', text);
     throw new Error('Cloudinary upload failed');
   }
 
