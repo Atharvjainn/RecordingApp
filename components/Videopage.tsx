@@ -108,7 +108,7 @@ const VideoPage = ({ video, videoUrl }: VideoPageProps) => {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="rounded-xl border bg-white flex flex-col h-[520px]">
+        <div className="rounded-xl border bg-white flex flex-col h-130">
 
           {/* TABS */}
           <div className="flex border-b">

@@ -14,7 +14,7 @@ export default function UploadVideoModal({
   onClose,
   initialFile
 }: UploadVideoModalProps) {
-  if (!isOpen) return null;
+  
 
     const [title,setTitle] = useState<string>("")
     const [description,setDescription] = useState<string>("")
@@ -60,7 +60,9 @@ export default function UploadVideoModal({
   }, [initialFile]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/40
+    ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+    `}>
       <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
         {/* Header */}
         <div className="mb-6">
@@ -87,7 +89,7 @@ export default function UploadVideoModal({
                       type="file"
                       accept="video/*"
                       className="block w-full text-sm file:mr-4 file:rounded-lg file:border-0
-                        file:bg-gradient-to-r file:from-purple-500 file:to-pink-500
+                        file:bg-linear-to-r file:from-purple-500 file:to-pink-500
                         file:px-4 file:py-2 file:text-white hover:file:opacity-90"
                       required
                       onChange={(e) => {
@@ -174,7 +176,7 @@ export default function UploadVideoModal({
 
             <button
               type="submit"
-              className="rounded-xl bg-gradient-to-r from-purple-500 to-pink-500
+              className="rounded-xl bg-linear-to-r from-purple-500 to-pink-500
                 px-5 py-2 text-sm font-medium text-white hover:opacity-90"
             >
               Upload Video

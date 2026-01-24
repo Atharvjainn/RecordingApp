@@ -6,7 +6,6 @@ import {
   Filter,
   LayoutGrid,
   List,
-  Clock,
   Calendar
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -28,7 +27,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if(authUser && !isCheckingAuth)  getvideos()
-  },[getvideos,authUser,isCheckingAuth])
+  },[getvideos,authUser,isCheckingAuth,open])
 
 
   
@@ -50,8 +49,8 @@ export default function Dashboard() {
         } } initialFile={recordedFile}/>
       {/* RECORD ACTIONS */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#f2efff] to-[#f7f4ff] border cursor-pointer hover:shadow-md transition" onClick={() => SetrecordOpen(true)}>
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary grid place-items-center text-white">
+        <div className="flex items-center gap-5 p-6 rounded-2xl bg-linear-to-br from-[#f2efff] to-[#f7f4ff] border cursor-pointer hover:shadow-md transition" onClick={() => SetrecordOpen(true)}>
+          <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-secondary grid place-items-center text-white">
             <Monitor />
           </div>
           <div>
@@ -62,8 +61,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#fff0f7] to-[#fff6fb] border cursor-pointer hover:shadow-md transition" onClick={() => setOpen(true)}>
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-primary grid place-items-center text-white">
+        <div className="flex items-center gap-5 p-6 rounded-2xl bg-linear-to-br from-[#fff0f7] to-[#fff6fb] border cursor-pointer hover:shadow-md transition" onClick={() => setOpen(true)}>
+          <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-secondary to-primary grid place-items-center text-white">
             <Camera />
           </div>
           <div>
@@ -75,8 +74,8 @@ export default function Dashboard() {
         </div>
 
 
-        <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#fff0f7] to-[#fff6fb] border cursor-pointer hover:shadow-md transition">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-primary grid place-items-center text-white">
+        <div className="flex items-center gap-5 p-6 rounded-2xl bg-linear-to-br from-[#fff0f7] to-[#fff6fb] border cursor-pointer hover:shadow-md transition">
+          <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-secondary to-primary grid place-items-center text-white">
             <Camera />
           </div>
           <div>
