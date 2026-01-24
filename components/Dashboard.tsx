@@ -14,26 +14,43 @@ import UploadVideoModal from "./UploadVideoModal";
 import { useVideoStore } from "@/store/useVideoStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import Link from "next/link";
+import RecordingModal from "./RecordModal";
+import RecorderControls from "./RecorderControls";
 
 export default function Dashboard() {
   // const videos = Array.from({ length: 6 });
   const [open,setOpen] = useState(false)
   const {videos,getvideos} = useVideoStore()
   const {authUser,isCheckingAuth} = useAuthStore()
+  const [recordOpen,SetrecordOpen] = useState(false)
+  const [showRecorder,setshowRecorder] = useState(false);
+  const [recordedFile,setrecordedFile] = useState<File | null > (null);
 
   useEffect(() => {
     if(authUser && !isCheckingAuth)  getvideos()
   },[getvideos,authUser,isCheckingAuth])
+
 
   
   
 
   return (
     <main className="px-8 py-10">
-      <UploadVideoModal isOpen={open} onClose={() => setOpen(false)} />
+
+      {showRecorder && <RecorderControls onFinish={(file) => {
+        setrecordedFile(file)
+        setOpen(true)
+        setshowRecorder(false)
+      }}/>}
+
+      <RecordingModal isOpen={recordOpen} onClose={() => SetrecordOpen(false)} onStop={() => setshowRecorder(true)} />
+      <UploadVideoModal isOpen={open} onClose={() => {
+        setOpen(false)
+        setrecordedFile(null)
+        } } initialFile={recordedFile}/>
       {/* RECORD ACTIONS */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#f2efff] to-[#f7f4ff] border cursor-pointer hover:shadow-md transition">
+        <div className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-[#f2efff] to-[#f7f4ff] border cursor-pointer hover:shadow-md transition" onClick={() => SetrecordOpen(true)}>
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary grid place-items-center text-white">
             <Monitor />
           </div>

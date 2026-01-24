@@ -1,16 +1,18 @@
 'use client';
 
 import { uploadVideoToCloudinary } from "@/lib/actions/cloudinary-client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 type UploadVideoModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  initialFile : File | null
 };
 
 export default function UploadVideoModal({
   isOpen,
   onClose,
+  initialFile
 }: UploadVideoModalProps) {
   if (!isOpen) return null;
 
@@ -47,6 +49,16 @@ export default function UploadVideoModal({
         onClose();
     }
 
+    useEffect(() => {
+    if (initialFile) {
+      setFile(initialFile);
+
+      // Optional smart defaults
+      setTitle("Screen recording");
+      setDescription("Recorded using the built-in recorder");
+    }
+  }, [initialFile]);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
@@ -67,18 +79,25 @@ export default function UploadVideoModal({
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Video File
             </label>
-            <input
-              type="file"
-              accept="video/*"
-              className="block w-full text-sm file:mr-4 file:rounded-lg file:border-0
-                file:bg-gradient-to-r file:from-purple-500 file:to-pink-500
-                file:px-4 file:py-2 file:text-white hover:file:opacity-90"
-              required
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                setFile(file || null)
-              }}
-            />
+            {file ?  <div className="text-sm text-gray-600">
+                      Selected file: <strong>{file.name}</strong>
+                    </div> 
+                    : 
+                     <input
+                      type="file"
+                      accept="video/*"
+                      className="block w-full text-sm file:mr-4 file:rounded-lg file:border-0
+                        file:bg-gradient-to-r file:from-purple-500 file:to-pink-500
+                        file:px-4 file:py-2 file:text-white hover:file:opacity-90"
+                      required
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        setFile(file || null)
+                      }}
+                    />
+                    
+                    }
+           
           </div>
 
           {/* Title */}
