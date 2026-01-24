@@ -85,6 +85,7 @@ model Video {
   videoId      String
   thumbnailUrl String
   visibility   Visibility
+  transcript   Json?
   duration     Int?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt

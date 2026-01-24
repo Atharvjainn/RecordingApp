@@ -24,6 +24,7 @@ export async function POST(req: Request) {
       videoId: extra.publicId,
       duration: extra.duration,
       visibility,
+      transcript: extra.transcript,
       thumbnailUrl,
       userId: user.id,
     },

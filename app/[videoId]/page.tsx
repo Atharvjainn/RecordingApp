@@ -1,6 +1,6 @@
 import VideoPage from "@/components/Videopage"
 import { getVideoByid } from "@/lib/actions/video-server"
-import { prisma } from "@/lib/prisma"
+
 
 type Params = {
   params: Promise<{
@@ -15,7 +15,14 @@ const page = async ({ params }: Params) => {
   const video = await getVideoByid(videoId)
 
   if(!video) {
-    // notFound()
+    return <div className="max-w-7xl mx-auto px-6 py-6">
+      <h1 className="text-2xl font-semibold text-gray-900">
+        Video not found
+      </h1>
+      <p className="text-gray-600">
+        The video you are looking for does not exist.
+      </p>
+    </div>
   }
 
 
