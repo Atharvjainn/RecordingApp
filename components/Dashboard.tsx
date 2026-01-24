@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import UploadVideoModal from "./UploadVideoModal";
 import { useVideoStore } from "@/store/useVideoStore";
 import { useAuthStore } from "@/store/useAuthStore";
+import Link from "next/link";
 
 export default function Dashboard() {
   // const videos = Array.from({ length: 6 });
@@ -96,6 +97,7 @@ export default function Dashboard() {
       {/* VIDEO GRID */}
       <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {videos.map((video, i) => (
+          <Link href={`/${video.videoId}`} key={video.id} className="block">
           <div
             key={i}
             className="rounded-2xl overflow-hidden border shadow-sm hover:shadow-lg transition bg-white"
@@ -128,6 +130,7 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+          </Link>
         ))}
       </section>
     </main>

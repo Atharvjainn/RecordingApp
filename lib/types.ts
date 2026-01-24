@@ -22,5 +22,4 @@ export interface Video {
     createdAt : Date,
     updatedAt : Date,
     userId : string
-
 }

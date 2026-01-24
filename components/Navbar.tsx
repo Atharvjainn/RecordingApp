@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/useAuthStore'
 import { getcurrentUser } from '@/lib/actions/auth-actions'
+import Link from 'next/link'
 
 const Navbar = () => {
     const [open,setOpen] = useState< "signin" | "signup" | null> (null)
@@ -56,17 +57,17 @@ const Navbar = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-slate-500 font-medium">
-          <a href="#">Features</a>
-          <a href="#">How It Works</a>
-          {authUser ? <a href="#" onClick={() => {
+          <Link href="/dashboard">Dashboard</Link>
+          <Link href="#">How It Works</Link>
+          {authUser ? <Link href="#" onClick={() => {
             signOut()
             router.push("/")
 
-          }}>Log Out</a> : <a href="#" onClick={async() => {setOpen("signin")
+          }}>Log Out</Link> : <Link href="#" onClick={async() => {setOpen("signin")
             const user = await getcurrentUser()
             console.log(user);
             
-          }}>Log in</a>}
+          }}>Log in</Link>}
           
             
             {/* MODAL */}

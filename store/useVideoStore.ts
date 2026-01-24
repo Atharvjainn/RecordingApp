@@ -1,12 +1,13 @@
 
 import { useAuthStore } from './useAuthStore'
 import {create} from 'zustand'
-import { getVideosByid } from '@/lib/actions/video-client'
+import { getVideosByid } from '@/lib/actions/video-server'
 
 type VideoStore = {
     isvideosloading : boolean,
     getvideos : () => void,
-    videos : any[]
+    videos : any[],
+
 }
 
 export const useVideoStore = create<VideoStore>((set,get) =>({
