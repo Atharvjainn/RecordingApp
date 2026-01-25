@@ -7,14 +7,17 @@ import { Select } from "./Select";
 type RecordModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onStop: () => void;
+  onStop: (config: {
+    source: "camera" | "screen" | "screen+camera";
+    cameraDeviceId?: string;
+    micDeviceId?: string;
+  }) => void;
 };
 
 const SOURCE_OPTIONS = [
-  "Full Screen",
-  "Window",
-  "Current Tab",
-  "Camera Only",
+  "camera",
+  "screen",
+  "screen+camera"
 ];
 
 export default function RecordingModal({
@@ -22,7 +25,7 @@ export default function RecordingModal({
   onClose,
   onStop,
 }: RecordModalProps) {
-  const [source, setSource] = useState("Full Screen");
+  const [source, setSource] = useState("screen");
   const [camera, setCamera] = useState("");
   const [mic, setMic] = useState("");
 
@@ -61,6 +64,9 @@ export default function RecordingModal({
 
   const cameraOptions = cameras.map(c => c.label || "Camera");
   const micOptions = mics.map(m => m.label || "Microphone");
+
+  const selectedCamera = cameras.find(c => c.label === camera);
+  const selectedMic = mics.find(m => m.label === mic);
 
   return (
     // 🌑 BACKDROP
@@ -117,7 +123,11 @@ export default function RecordingModal({
         <button
           className="mt-6 w-full rounded-lg bg-pink-500 py-3 text-sm font-medium text-white hover:bg-pink-600 transition"
           onClick={() => {
-            onStop();   // tell parent to start recording
+            onStop({
+            source: source as "camera" | "screen" | "screen+camera",
+            cameraDeviceId: selectedCamera?.deviceId,
+            micDeviceId: selectedMic?.deviceId,
+          });  
             onClose();  // close modal
           }}
         >

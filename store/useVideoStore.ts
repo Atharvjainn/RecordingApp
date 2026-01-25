@@ -1,7 +1,7 @@
 
 import { useAuthStore } from './useAuthStore'
 import {create} from 'zustand'
-import { getVideosByid } from '@/lib/actions/video-server'
+import { getVideosByid } from "@/lib/prisma/video"
 
 type VideoStore = {
     isvideosloading : boolean,

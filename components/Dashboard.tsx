@@ -15,6 +15,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import Link from "next/link";
 import RecordingModal from "./RecordModal";
 import RecorderControls from "./RecorderControls";
+import { startRecording } from "@/lib/recorder";
 
 export default function Dashboard() {
   // const videos = Array.from({ length: 6 });
@@ -24,6 +25,7 @@ export default function Dashboard() {
   const [recordOpen,SetrecordOpen] = useState(false)
   const [showRecorder,setshowRecorder] = useState(false);
   const [recordedFile,setrecordedFile] = useState<File | null > (null);
+  const [source, setSource] = useState("screen");
 
   useEffect(() => {
     if(authUser && !isCheckingAuth)  getvideos()
@@ -42,7 +44,13 @@ export default function Dashboard() {
         setshowRecorder(false)
       }}/>}
 
-      <RecordingModal isOpen={recordOpen} onClose={() => SetrecordOpen(false)} onStop={() => setshowRecorder(true)} />
+      <RecordingModal isOpen={recordOpen} onClose={() => {SetrecordOpen(false)}} 
+          onStop={(config) => {
+            startRecording({mode : config.source,videoDeviceId : config.cameraDeviceId,audioDeviceId : config.cameraDeviceId
+            })
+            setshowRecorder(true)
+          }}      
+      />
       <UploadVideoModal isOpen={open} onClose={() => {
         setOpen(false)
         setrecordedFile(null)

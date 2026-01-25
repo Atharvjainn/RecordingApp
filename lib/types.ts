@@ -8,7 +8,7 @@ export interface User {
     updatedAt : Date
 }
 
-type Visibility = 'public' | 'private' 
+export type Visibility = 'public' | 'private' 
 
 export interface Video {
     id : string,
@@ -19,7 +19,7 @@ export interface Video {
     thumbnailUrl : string,
     visibility : Visibility,
     duration : number | null,
-    createdAt : Date,
-    updatedAt : Date,
+    createdAt? : Date,
+    updatedAt? : Date,
     userId : string
 }

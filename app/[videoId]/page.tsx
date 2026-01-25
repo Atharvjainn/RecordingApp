@@ -1,5 +1,5 @@
 import VideoPage from "@/components/Videopage"
-import { getVideoByid } from "@/lib/actions/video-server"
+import { getVideoByid } from "@/lib/prisma/video"
 
 
 type Params = {

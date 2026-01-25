@@ -1,6 +1,6 @@
 'use client';
 
-import { uploadVideoToCloudinary } from "@/lib/actions/cloudinary-client";
+import { uploadVideoClient } from "@/lib/actions/upload-client";
 import React, { useState,useEffect } from "react";
 
 type UploadVideoModalProps = {
@@ -27,24 +27,21 @@ export default function UploadVideoModal({
             alert("Please select a video file to upload.")
             return
         }
-        const extra = await uploadVideoToCloudinary(file)
-        const res = await fetch('/api/videos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title,
-          description,
-          visibility,
-          extra: extra,
-        }),
-        });
+        // const extra = await uploadVideoToCloudinary(file)
+        // const res = await fetch('/api/videos', {
+        // method: 'POST',
+        // headers: { 'Content-Type': 'application/json' },
+        // body: JSON.stringify({
+        //   title,
+        //   description,
+        //   visibility,
+        //   extra: extra,
+        // }),
+
+        const res = await uploadVideoClient({file,title,description,visibility})
+        // });
         
-        if (!res.ok) {
-          console.log(res);
-          
-        alert('Failed to save video');
-         return;
-        }
+        
 
         onClose();
     }

@@ -1,7 +1,17 @@
 'use server'
 
 import { prisma } from "../prisma"
+import { Video } from "../types"
 
+export const uploadVideoToPrisma = async(data : Video) => {
+    try {
+        const video = await prisma.video.create({data})
+        return video
+    } catch (error) {
+        console.error("Prisma upload video error:", error);
+        throw error
+    } 
+}
 
 export const getVideosByid = async (userId : string) => {
     try {

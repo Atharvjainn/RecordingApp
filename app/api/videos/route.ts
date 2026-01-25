@@ -1,34 +1,49 @@
-import { prisma } from '@/lib/prisma';
-import { getcurrentUser } from '@/lib/actions/auth-actions';
-import { randomUUID } from 'crypto';
 
-export async function POST(req: Request) {
-  const body = await req.json();
-  const { title, description, visibility, extra } = body;
+import { getcurrentUser } from "@/lib/actions/auth-actions"
+import { UploadVideoToCloudinary } from "@/lib/cloudinary/upload"
+import { uploadVideoToPrisma } from "@/lib/prisma/video"
+import { Visibility } from "@/lib/types"
+import { randomUUID } from "crypto"
 
-  const user = await getcurrentUser();
-  if (!user?.id) {
-    return new Response('Unauthorized', { status: 401 });
-  }
 
-  const videoId = randomUUID();
 
-  const thumbnailUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/so_1/${extra.publicId}.jpg`;
+export async function POST(req : Request){
+    try {
+        const body = await req.formData()
+        const title = body.get('title')
+        const file = body.get('file')
+        const description = body.get('description')
+        const rawVisibility = body.get('visibility')
+        const visibility: Visibility =
+            rawVisibility === "public" || rawVisibility === "private"
+                ? rawVisibility
+                : "private"; // fallback
+        const user = await getcurrentUser();
+        if(!user) throw new Error("User is not authenticated!!")
 
-  const video = await prisma.video.create({
-    data: {
-      id: videoId,
-      title,
-      description,
-      videoUrl: extra.url,
-      videoId: extra.publicId,
-      duration: extra.duration,
-      visibility,
-      transcript: extra.transcript,
-      thumbnailUrl,
-      userId: user.id,
-    },
-  });
+        //upload to cloudinary
+        const response = await UploadVideoToCloudinary(file as Blob)
 
-  return Response.json({ success: true, data: video });
+        //upload to db
+        const Id = randomUUID()
+        const thumbnailUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/so_1/${response.public_id}.jpg`;
+
+        await uploadVideoToPrisma({
+            id : Id,
+            title : title as string,
+            description : description as string,
+            videoUrl : response.secure_url,
+            videoId : response.public_id,
+            duration : response.duration,
+            visibility : visibility,
+            thumbnailUrl : thumbnailUrl,
+            userId : user.id
+        })
+
+        return Response.json({success : true})
+
+    } catch (error) {
+        console.error("Temp-video error:", error);
+        return new Response("Internal server error", { status: 500 });   
+    }
 }

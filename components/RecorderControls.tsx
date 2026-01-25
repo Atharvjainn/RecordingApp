@@ -1,59 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  startRecording,
   pauseRecording,
   resumeRecording,
   stopRecording,
 } from "@/lib/recorder";
-import { uploadVideoToCloudinary } from "@/lib/actions/cloudinary-client";
 
 type RecorderControlsProps = {
   onFinish: (file: File) => void;
 };
 
-export default function RecorderControls({onFinish} : RecorderControlsProps) {
+export default function RecorderControls({ onFinish }: RecorderControlsProps) {
   const [state, setState] = useState<
-    "idle" | "recording" | "paused" | "saving"
-  >("idle");
+    "recording" | "paused" | "saving"
+  >("recording");
 
-  const handleStart = async () => {
-    await startRecording({ mode: "screen" });
+  // RecorderControls assumes recording is already started
+  useEffect(() => {
     setState("recording");
-  };
+  }, []);
 
   const handleStop = async () => {
     setState("saving");
     const file = await stopRecording();
-    // await uploadVideoToCloudinary(file);
-    onFinish(file)
-    setState("idle");
+    onFinish(file);
   };
 
   return (
-    <div>
-      {state === "idle" && (
-        <button onClick={handleStart}>Start</button>
-      )}
-
+    <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-xl bg-white px-4 py-2 shadow-lg">
       {state === "recording" && (
         <>
-          <button onClick={() => { pauseRecording(); setState("paused"); }}>
+          <button
+            onClick={() => {
+              pauseRecording();
+              setState("paused");
+            }}
+          >
             Pause
           </button>
+
           <button onClick={handleStop}>Stop</button>
         </>
       )}
 
       {state === "paused" && (
         <>
-          <button onClick={() => { resumeRecording(); setState("recording"); }}>
+          <button
+            onClick={() => {
+              resumeRecording();
+              setState("recording");
+            }}
+          >
             Resume
           </button>
+
           <button onClick={handleStop}>Stop</button>
         </>
       )}
+
+      {state === "saving" && <span>Saving…</span>}
     </div>
   );
 }
