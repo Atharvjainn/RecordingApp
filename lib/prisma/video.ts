@@ -40,6 +40,7 @@ export const getVideoByid = async (videoId : string) => {
                 description : true,
                 visibility : true,
                 videoId : true,
+                videoUrl : true,
                 user : {
                     select : {
                         id : true,

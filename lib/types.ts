@@ -34,7 +34,8 @@ export interface VideoWithUser {
   id: string
   title: string
   description: string
-  visibility: Visibility
+  visibility: Visibility,
+  videoUrl : string,
   videoId : string,
   user: PublicUser
 }

@@ -9,3 +9,13 @@ export const copylink = async () => {
         toast.error("Cannot Copy")        
     }
 }
+
+
+export function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, '-')      // spaces & underscores → -
+    .replace(/[^\w\-]+/g, '')     // remove non-word chars
+    .replace(/\-\-+/g, '-')       // collapse multiple -
+}

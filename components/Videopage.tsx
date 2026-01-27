@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import {  VideoWithUser } from '@/lib/types'
 import { useAuthStore } from '@/store/useAuthStore'
-import { deleteVideo } from '@/lib/cloudinary/delete-client'
 import { copylink } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { updateVideoById } from '@/lib/prisma/video'
@@ -16,7 +15,7 @@ type VideoPageProps = {
   videoUrl: string
 }
 
-const VideoPage = ({ video, videoUrl }: VideoPageProps) => {
+const VideoPage = ({ video, videoUrl  }: VideoPageProps) => {
   
   const { authUser } = useAuthStore()
   const {deletevideo} = useVideoStore()
