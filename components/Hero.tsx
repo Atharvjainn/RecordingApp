@@ -1,6 +1,6 @@
 'use client'
 import { useUiStore } from "@/store/useUiStore";
-import { Camera, Monitor, Upload, Play } from "lucide-react";
+import { Camera, Monitor, Upload, Play} from "lucide-react";
 
 export default function DashboardHero() {
     const {activeModal,open,close} = useUiStore()
@@ -8,7 +8,7 @@ export default function DashboardHero() {
 
 
   return (
-    <section className="max-w-7xl mx-auto px-6 mt-10">
+    <section className="max-w-7xl mx-auto px-6 mt-20">
       <div className="relative rounded-3xl bg-white/80 backdrop-blur-md border border-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-10">
         {/* Header */}
         <div className="flex items-start justify-between gap-8">

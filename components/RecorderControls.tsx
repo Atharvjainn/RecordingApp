@@ -63,7 +63,7 @@ export default function RecorderControls() {
         </>
       )}
 
-      {state === "saving" && <span>Saving…</span>}
+      {/* {state === "saving" && <span>Saving…</span>} */}
     </div>
   );
 }

@@ -144,33 +144,60 @@ export default function Dashboard() {
     <Link
       href={`/videos/${video.videoId}`}
       key={video.id}
-      className="block"
+      className="group block"
     >
-      <div className="rounded-2xl overflow-hidden border shadow-sm hover:shadow-lg transition bg-white">
-        {/* THUMBNAIL */}
-        <img
-          src={video.thumbnailUrl}
-          alt={video.title}
-          className="w-full aspect-video object-cover"
-        />
+      <div className="rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition">
 
-        {/* CONTENT */}
-        <div className="p-4 space-y-2">
+        {/* THUMBNAIL */}
+        <div className="relative aspect-video bg-black">
+
+          {/* Thumbnail image */}
+          <img
+            src={video.thumbnailUrl}
+            alt={video.title}
+            className="h-full w-full object-cover opacity-90"
+          />
+
+          {/* Dark gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+
+          {/* Top-left badge */}
+          <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1 text-xs text-white">
+            <span className="h-2 w-2 rounded-full bg-red-500" />
+            <span>{video.duration ?? "03:42"}</span>
+            <span className="opacity-60">•</span>
+            <span>{video.relativeTime ?? "Today"}</span>
+          </div>
+
+          {/* Play button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur text-white transition group-hover:scale-105">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6 fill-current translate-x-[1px]"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* INFO PANEL */}
+        <div className="p-4">
           <h3 className="font-semibold leading-snug line-clamp-2">
             {video.title}
           </h3>
 
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <Calendar size={14} />
-            <span>
-              {new Date(video.createdAt).toLocaleDateString()}
-            </span>
-          </div>
+          <p className="mt-1 text-sm text-slate-500">
+           {video.visibility?.[0].toUpperCase() + video.visibility.slice(1)} • 1080p
+          </p>
         </div>
+
       </div>
     </Link>
   ))}
-      </section>
+</section>
+
 
     </main>
   );
