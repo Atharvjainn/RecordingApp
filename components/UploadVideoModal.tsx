@@ -4,17 +4,14 @@ import { uploadVideoClient } from "@/lib/cloudinary/upload-client";
 import { useUiStore } from "@/store/useUiStore";
 import React, { useState,useEffect } from "react";
 
-type UploadVideoModalProps = {
-  onClose: () => void;
-  initialFile : File | null
-};
+// type UploadVideoModalProps = {
+//   onClose: () => void;
+//   initialFile : File | null
+// };
 
-export default function UploadVideoModal({
-  onClose,
-  initialFile
-}: UploadVideoModalProps) {
+export default function UploadVideoModal() {
   
-    const {activeModal} = useUiStore()
+    const {activeModal,close,open} = useUiStore()
     const [title,setTitle] = useState<string>("")
     const [description,setDescription] = useState<string>("")
     const [visibility,setVisibility] = useState<'public' | 'private'> ("private")
@@ -39,26 +36,24 @@ export default function UploadVideoModal({
 
         const res = await uploadVideoClient({file,title,description,visibility})
         // });
-        
-        
-
-        onClose();
+        close();
     }
 
-    useEffect(() => {
-    if (initialFile) {
-      setFile(initialFile);
-
-      // Optional smart defaults
-      setTitle("Screen recording");
-      setDescription("Recorded using the built-in recorder");
-    }
-  }, [initialFile]);
+  //   useEffect(() => {
+  //   if (initialFile) {
+  //     setFile(initialFile);
+  //     // Optional smart defaults
+  //     setTitle("Screen recording");
+  //     setDescription("Recorded using the built-in recorder");
+  //   }
+  // }, [initialFile]);
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/40
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-200
     ${activeModal=="Upload" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
-    `}>
+    `}
+    onClick={() => close()}
+    >
       <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
         {/* Header */}
         <div className="mb-6">
@@ -164,7 +159,7 @@ export default function UploadVideoModal({
           <div className="flex justify-end gap-3 pt-4">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => close()}
               className="rounded-xl border border-gray-200 px-4 py-2 text-sm hover:bg-gray-50"
             >
               Cancel

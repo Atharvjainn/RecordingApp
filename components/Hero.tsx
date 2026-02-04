@@ -54,10 +54,7 @@ export default function DashboardHero() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button className="flex items-center justify-center gap-3 rounded-xl bg-black px-6 py-5 text-white text-base font-medium transition hover:bg-black/90 cursor-pointer"
             onClick={() =>{
-                console.log("OPEN CLICKED");
-            console.log(activeModal)
              open("Recorder")
-             console.log(activeModal)
             }}
             >
               <Camera size={18} />

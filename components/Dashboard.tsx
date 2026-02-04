@@ -63,10 +63,7 @@ export default function Dashboard() {
       /> */}
 
       
-      <UploadVideoModal  onClose={() => {
-        close()
-        setrecordedFile(null)
-        } } initialFile={recordedFile}/>
+      <UploadVideoModal/>
       {/* RECORD ACTIONS */}
       {/* <section className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
         {/* <div className="flex items-center gap-5 p-6 rounded-2xl bg-linear-to-br from-[#f2efff] to-[#f7f4ff] border cursor-pointer hover:shadow-md transition" onClick={() => SetrecordOpen(true)}>

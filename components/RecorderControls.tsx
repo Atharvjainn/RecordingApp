@@ -6,12 +6,14 @@ import {
   resumeRecording,
   stopRecording,
 } from "@/lib/recorder";
+import { useUiStore } from "@/store/useUiStore";
 
-type RecorderControlsProps = {
-  onFinish: (file: File) => void;
-};
+// type RecorderControlsProps = {
+//   onFinish: (file: File) => void;
+// };
 
-export default function RecorderControls({ onFinish }: RecorderControlsProps) {
+export default function RecorderControls() {
+  const {RecordControls,openRecordControls,closeRecordControls} = useUiStore()
   const [state, setState] = useState<
     "recording" | "paused" | "saving"
   >("recording");
@@ -24,11 +26,11 @@ export default function RecorderControls({ onFinish }: RecorderControlsProps) {
   const handleStop = async () => {
     setState("saving");
     const file = await stopRecording();
-    onFinish(file);
+    // onFinish(file);
   };
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-xl bg-white px-4 py-2 shadow-lg">
+    <div className={`fixed  bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-xl bg-white px-4 py-2 shadow-lg  ${RecordControls ? "" : "hidden"}`}>
       {state === "recording" && (
         <>
           <button
