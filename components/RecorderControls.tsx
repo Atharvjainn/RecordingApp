@@ -13,7 +13,7 @@ import { useUiStore } from "@/store/useUiStore";
 // };
 
 export default function RecorderControls() {
-  const {RecordControls,openRecordControls,closeRecordControls} = useUiStore()
+  const {RecordControls,closeRecordControls,initialFile,addFile,open} = useUiStore()
   const [state, setState] = useState<
     "recording" | "paused" | "saving"
   >("recording");
@@ -26,6 +26,8 @@ export default function RecorderControls() {
   const handleStop = async () => {
     setState("saving");
     const file = await stopRecording();
+    addFile(file)
+    open("Upload")
     // onFinish(file);
   };
 

@@ -34,15 +34,15 @@ export default function RootLayout({
   {/* Background glow */}
   <div className="pointer-events-none fixed inset-0 -z-10">
     {/* soft red glow — centered lower */}
-    <div className="absolute top-[1%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-red-200/30 blur-[160px]" />
+    <div className="absolute top-[1%] left-1/2 -translate-x-1/2 w-225 h-225 rounded-full bg-red-200/30 blur-[160px]" />
 
     {/* subtle neutral depth */}
-    <div className="absolute top-[55%] left-[25%] w-[600px] h-[600px] rounded-full bg-black/5 blur-[180px]" />
+    <div className="absolute top-[55%] left-[25%] w-150 h-150 rounded-full bg-black/5 blur-[180px]" />
   </div>
 
   <Navbar />
   {children}
-  <RecordingModal />
+  {/* <RecordingModal /> */}
   <RecorderControls />
   <ToasterProvider />
 </body>

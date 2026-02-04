@@ -11,7 +11,7 @@ import React, { useState,useEffect } from "react";
 
 export default function UploadVideoModal() {
   
-    const {activeModal,close,open} = useUiStore()
+    const {activeModal,close,open,initialFile} = useUiStore()
     const [title,setTitle] = useState<string>("")
     const [description,setDescription] = useState<string>("")
     const [visibility,setVisibility] = useState<'public' | 'private'> ("private")
@@ -33,20 +33,21 @@ export default function UploadVideoModal() {
         //   visibility,
         //   extra: extra,
         // }),
+        console.log("clicked")
 
         const res = await uploadVideoClient({file,title,description,visibility})
         // });
         close();
     }
 
-  //   useEffect(() => {
-  //   if (initialFile) {
-  //     setFile(initialFile);
-  //     // Optional smart defaults
-  //     setTitle("Screen recording");
-  //     setDescription("Recorded using the built-in recorder");
-  //   }
-  // }, [initialFile]);
+    useEffect(() => {
+    if (initialFile) {
+      setFile(initialFile);
+      // Optional smart defaults
+      setTitle("Screen recording");
+      setDescription("Recorded using the built-in recorder");
+    }
+  }, [initialFile]);
 
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-200
@@ -54,7 +55,9 @@ export default function UploadVideoModal() {
     `}
     onClick={() => close()}
     >
-      <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
+      <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl"
+      onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-gray-900">
