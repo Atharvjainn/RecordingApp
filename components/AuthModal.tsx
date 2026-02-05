@@ -44,6 +44,7 @@ export default function AuthModal() {
             }
         }
     }
+    close()
   }
 
   const providerLogin = async(provider : 'google' | 'github') => {
@@ -55,6 +56,7 @@ export default function AuthModal() {
         const user = await signInSocial(provider)
         if(user) router.push('/dashboard')
     }
+    close()
   }
 
   return (

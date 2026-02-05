@@ -35,11 +35,11 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#f7f4ee]/80 backdrop-blur">
 
       {activeModal=="Auth" && <AuthModal />}
-      
+
       <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
 
         {/* LEFT — LOGO */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white">
             <VideoIcon />
           </div>

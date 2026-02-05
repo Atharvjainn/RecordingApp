@@ -6,6 +6,7 @@ import { ToasterProvider } from "@/components/ToasterProvider";
 import RecordingModal from "@/components/RecordModal";
 import RecorderControls from "@/components/RecorderControls";
 import AuthModal from "@/components/AuthModal";
+import FancyFooter from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({
   <div className="mt-18">
     {children}
   </div>
+  <FancyFooter />
   
   {/* <RecordingModal /> */}
   <RecorderControls />

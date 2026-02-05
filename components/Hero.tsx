@@ -38,7 +38,7 @@ export default function DashboardHero() {
           </div>
 
           {/* Stats Card */}
-          <div className="hidden sm:block rounded-2xl border border-black/5 bg-white px-6 py-5 shadow-sm">
+          {/* <div className="hidden sm:block rounded-2xl border border-black/5 bg-white px-6 py-5 shadow-sm">
             <p className="text-sm text-black/50">This week</p>
             <p className="mt-1 text-3xl font-semibold text-black">12</p>
             <p className="text-sm text-black/50">clips recorded</p>
@@ -46,7 +46,7 @@ export default function DashboardHero() {
               <Play size={16} />
               Tap a card to preview
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Actions */}

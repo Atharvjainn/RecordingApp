@@ -17,6 +17,7 @@ import RecordingModal from "./RecordModal";
 import RecorderControls from "./RecorderControls";
 import { startRecording } from "@/lib/recorder";
 import Hero from "./Hero";
+import { formatDuration } from "@/lib/utils";
 import { useUiStore } from "@/store/useUiStore";
 
 
@@ -164,7 +165,7 @@ export default function Dashboard() {
           {/* Top-left badge */}
           <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1 text-xs text-white">
             <span className="h-2 w-2 rounded-full bg-red-500" />
-            <span>{video.duration ?? "03:42"}</span>
+            <span>{formatDuration(video.duration) ?? "03:42"}</span>
             <span className="opacity-60">•</span>
             <span>{video.relativeTime ?? "Today"}</span>
           </div>
