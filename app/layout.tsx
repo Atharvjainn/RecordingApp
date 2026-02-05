@@ -5,6 +5,7 @@ import "./globals.css";
 import { ToasterProvider } from "@/components/ToasterProvider";
 import RecordingModal from "@/components/RecordModal";
 import RecorderControls from "@/components/RecorderControls";
+import AuthModal from "@/components/AuthModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,9 +42,13 @@ export default function RootLayout({
   </div>
 
   <Navbar />
-  {children}
+  <div className="mt-18">
+    {children}
+  </div>
+  
   {/* <RecordingModal /> */}
   <RecorderControls />
+  {/* <AuthModal /> */}
   <ToasterProvider />
 </body>
     </html>

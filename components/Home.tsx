@@ -6,7 +6,7 @@ export default function Home() {
     <>
       
       {/* HERO */}
-      <main className="max-w-5xl mx-auto px-6 text-center mt-24 relative">
+      <main className="max-w-5xl mx-auto px-6 text-center mt-35 relative">
 
         <h1 className="text-[clamp(42px,6vw,72px)] font-extrabold leading-tight">
           Record.{" "}
@@ -39,10 +39,7 @@ export default function Home() {
         </div>
 
         {/* RECORDING BADGE */}
-        <div className="hidden md:flex absolute left-0 -bottom-20 items-center gap-3 px-4 py-3 rounded-xl bg-white shadow-xl font-semibold">
-          <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
-          Recording…
-        </div>
+        
       </main>
     </>
   );

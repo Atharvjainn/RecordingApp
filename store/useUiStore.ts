@@ -1,7 +1,7 @@
 import {create} from 'zustand'
 
 
-type ModalType = "Upload" | "Recorder" | null
+type ModalType = "Upload" | "Recorder" | "Auth" | null
 
 type UiStore = {
     activeModal : ModalType,
