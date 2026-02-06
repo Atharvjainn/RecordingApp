@@ -7,6 +7,8 @@ import RecordingModal from "@/components/RecordModal";
 import RecorderControls from "@/components/RecorderControls";
 import AuthModal from "@/components/AuthModal";
 import FancyFooter from "@/components/Footer";
+import Loader from "@/components/Loader";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,12 +43,14 @@ export default function RootLayout({
     {/* subtle neutral depth */}
     <div className="absolute top-[55%] left-[25%] w-150 h-150 rounded-full bg-black/5 blur-[180px]" />
   </div>
+  <Providers>{children}</Providers>
 
-  <Navbar />
-  <div className="mt-18">
+  {/* <Navbar /> */}
+  {/* <Loader /> */}
+  {/* <div className="mt-18">
     {children}
-  </div>
-  <FancyFooter />
+  </div> */}
+  {/* <FancyFooter /> */}
   
   {/* <RecordingModal /> */}
   <RecorderControls />

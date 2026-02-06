@@ -19,17 +19,17 @@ import { startRecording } from "@/lib/recorder";
 import Hero from "./Hero";
 import { formatDuration } from "@/lib/utils";
 import { useUiStore } from "@/store/useUiStore";
+import Loader from "./Loader";
 
 
 export default function Dashboard() {
-  // const videos = Array.from({ length: 6 });
   const {RecordControls,closeRecordControls,activeModal,open} = useUiStore()
-  // const [open,setOpen] = useState(false)
   const {Myvideos,getMyvideos,getAllVideos,AllVideos,isdeleting} = useVideoStore()
-  const {authUser,isCheckingAuth} = useAuthStore()
+  const {authUser,isCheckingAuth,checkauth} = useAuthStore()
   const [recordedFile,setrecordedFile] = useState<File | null > (null);
   const [activeTab, setActiveTab] = useState<"all" | "mine">("all")
   const videos = activeTab === "all" ? AllVideos : Myvideos
+  
 
 
   useEffect(() => {
@@ -38,7 +38,6 @@ export default function Dashboard() {
   getMyvideos()
   getAllVideos()
 }, [authUser?.id, isCheckingAuth,isdeleting])
-
 
 
 

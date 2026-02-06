@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuthStore } from "@/store/useAuthStore";
 import { motion } from "framer-motion";
 import {
   Camera,
@@ -13,8 +14,11 @@ import {
   Play,
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
+import Loader from "./Loader";
 
 export default function LandingPage() {
+  
   return (
     <div className="min-h-screen bg-[#fbf7ef]">
 

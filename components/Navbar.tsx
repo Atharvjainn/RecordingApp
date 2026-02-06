@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
 
         {/* LEFT — LOGO */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/')}>
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white">
             <VideoIcon />
           </div>

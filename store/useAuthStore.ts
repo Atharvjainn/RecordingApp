@@ -9,6 +9,7 @@ type AuthStore = {
     authUser : User | null,
     isCheckingAuth : boolean,
     checkauth : () => void,
+    hasCheckedAuth: boolean;
     signUp : (data : {email : string,password : string ,name : string}) => Promise < User | undefined>,
     signIn : (data : {email : string,password : string}) => Promise < User | undefined>,
     signOut : () => void,
@@ -19,8 +20,10 @@ type AuthStore = {
 export const useAuthStore = create<AuthStore>((set,get) => ({
     isCheckingAuth : false,
     authUser : null,
+    hasCheckedAuth: false,
 
     checkauth : async () => {
+        if(get().hasCheckedAuth) return;
         set({isCheckingAuth : true})
         try {
             const user = await getcurrentUser()
@@ -28,7 +31,10 @@ export const useAuthStore = create<AuthStore>((set,get) => ({
         } catch (error) {
             console.log("Error in signup store...")
         } finally {
-            set({isCheckingAuth : false})
+            set({
+                isCheckingAuth : false,
+                hasCheckedAuth : true
+            })
         }
     },
 
