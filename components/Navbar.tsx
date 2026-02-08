@@ -17,6 +17,16 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const scrolltovideos = () => {
+    const element = document.getElementById('videos')
+    if(element){
+      element.scrollIntoView({
+        behavior : "smooth",
+        block : "start"
+      })
+    }
+  }
+
   useEffect(() => {
     checkauth();
   }, [checkauth]);
@@ -57,12 +67,12 @@ export default function Navbar() {
               <Link href="/dashboard" className="hover:text-black transition">
                 DASHBOARD
               </Link>
-              <Link href="#" className="hover:text-black transition">
-                STUDIO
+              <Link href="/" className="hover:text-black transition">
+                HOME
               </Link>
-              <Link href="#" className="hover:text-black transition">
-                FLOW
-              </Link>
+              <button  onClick={scrolltovideos} className="hover:text-black transition">
+                VIDEOS
+              </button>
             </nav>
 
             {/* RIGHT ACTIONS */}
@@ -83,8 +93,8 @@ export default function Navbar() {
                 <div ref={menuRef} className="relative">
                   <button
                     onClick={() => setMenuOpen((v) => !v)}
-                    className="flex items-center gap-2 rounded-full bg-white px-2 py-1.5 shadow-sm border border-black/10 hover:shadow transition"
-                  >
+                    className="flex items-center gap-2 rounded-full bg-white px-2 py-1.5 shadow-sm border border-black/10 hover:shadow transition cursor-pointer"
+                  > 
                     {authUser.image ? (
                       <img
                         src={authUser.image as string}
@@ -107,7 +117,7 @@ export default function Navbar() {
                       </div>
 
                       <Link
-                        href={userProfileUrl(authUser)}
+                        href={`/users/${authUser.id}`}
                         onClick={() => setMenuOpen(false)}
                         className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-black/5"
                       >
@@ -121,7 +131,7 @@ export default function Navbar() {
                           setMenuOpen(false);
                           router.push("/");
                         }}
-                        className="flex w-full items-center gap-3 px-4 py-3 text-sm hover:bg-black/5"
+                        className="flex w-full items-center gap-3 px-4 py-3 text-sm hover:bg-black/5 cursor-pointer"
                       >
                         <LogOut size={16} />
                         Logout

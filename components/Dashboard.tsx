@@ -67,7 +67,7 @@ export default function Dashboard() {
         <div className="flex items-center rounded-full border border-black/10 bg-white/70 backdrop-blur px-1 py-1 shadow-sm">
           <button
             onClick={() => setActiveTab("all")}
-            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer ${
               activeTab === "all"
                 ? "bg-black text-white shadow"
                 : "text-slate-600 hover:text-black"
@@ -77,7 +77,7 @@ export default function Dashboard() {
           </button>
           <button
             onClick={() => setActiveTab("mine")}
-            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer ${
               activeTab === "mine"
                 ? "bg-black text-white shadow"
                 : "text-slate-600 hover:text-black"
@@ -89,7 +89,7 @@ export default function Dashboard() {
       </section>
 
       {/* CONTENT */}
-      <section className="mt-6">
+      <section className="mt-6 scroll-mt-40 " id="videos">
         {isvideosloading || !hasloaded  ? (
           /* 🔄 LOADING */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
