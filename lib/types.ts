@@ -21,7 +21,7 @@ export interface Video {
     thumbnailUrl : string,
     visibility : Visibility,
     duration : number | null,
-    createdAt? : Date,
+    createdAt? : Date | string | number,
     updatedAt? : Date,
     transcript? : any, 
     userId : string

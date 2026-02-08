@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoaderIcon, Upload, X } from "lucide-react";
 import { useVideoStore } from "@/store/useVideoStore";
+import { set } from "better-auth";
 
 export default function UploadVideoModal() {
   const { activeModal, close, initialFile } = useUiStore();
@@ -23,6 +24,10 @@ export default function UploadVideoModal() {
     }
 
     await uploadVideo({ file, title, description, visibility });
+    setTitle("");
+    setDescription("");
+    setVisibility("private");
+    setFile(null);
     close();
   };
 

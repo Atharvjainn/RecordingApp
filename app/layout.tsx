@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { ToasterProvider } from "@/components/ToasterProvider";
-import RecordingModal from "@/components/RecordModal";
-import RecorderControls from "@/components/RecorderControls";
-import AuthModal from "@/components/AuthModal";
-import FancyFooter from "@/components/Footer";
-import Loader from "@/components/Loader";
 import Providers from "./providers";
+
+export const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+export const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-  className={`${geistSans.variable} ${geistMono.variable} antialiased text-slate-900 bg-[#f7f4ee] relative `}
+  className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} antialiased text-slate-900 bg-[#f7f4ee] relative `}
 >
   {/* Background glow */}
   <div className="pointer-events-none fixed inset-0 -z-10">

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { updateVideoById } from "@/lib/prisma/video";
 import { useVideoStore } from "@/store/useVideoStore";
 import Link from "next/link";
+import CloudinaryVideoPlayer from "@/components/CloudinaryVideoPlayer";
 
 type VideoPageProps = {
   video: VideoWithUser;
@@ -27,7 +28,7 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
   const [showVisibility, setShowVisibility] = useState(false);
 
   const deleteVideo = async () => {
-     deletevideo(video.videoId);
+    deletevideo(video.videoId);
     router.push("/dashboard");
   };
 
@@ -41,13 +42,13 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="max-w-7xl mx-auto px-6 py-6 space-y-8"
+      className="max-w-7xl mx-auto px-6 py-8 space-y-10 font-body"
     >
       {/* HEADER */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         {/* LEFT */}
-        <div className="space-y-3">
-          <h1 className="text-2xl font-semibold text-black">
+        <div className="space-y-4">
+          <h1 className="text-3xl font-heading font-semibold tracking-tight text-black">
             {video.title}
           </h1>
 
@@ -69,7 +70,7 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
           </div>
 
           {video.description && (
-            <p className="text-slate-600 max-w-3xl">
+            <p className="text-[15px] leading-relaxed text-slate-600 max-w-3xl">
               {video.description}
             </p>
           )}
@@ -79,7 +80,7 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
         <div className="flex items-center gap-2">
           <button
             onClick={copylink}
-            className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5 transition"
+            className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5 transition cursor-pointer"
           >
             <LinkIcon size={14} />
             Copy link
@@ -89,7 +90,7 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
             <>
               <button
                 onClick={deleteVideo}
-                className="flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-100 transition"
+                className="flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-100 transition cursor-pointer"
               >
                 <Trash2 size={14} />
                 Delete
@@ -99,7 +100,7 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
               <div className="relative">
                 <button
                   onClick={() => setShowVisibility((v) => !v)}
-                  className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5 transition"
+                  className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5 transition cursor-pointer"
                 >
                   <Eye size={14} />
                   {visibility.charAt(0).toUpperCase() +
@@ -109,9 +110,9 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
                 <AnimatePresence>
                   {showVisibility && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
                       className="absolute right-0 mt-2 w-36 rounded-xl border bg-white shadow-lg z-20 overflow-hidden"
                     >
@@ -145,20 +146,19 @@ export default function VideoPage({ video, videoUrl }: VideoPageProps) {
 
       {/* VIDEO PLAYER */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
+        initial={{ opacity: 0, scale: 0.985 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
-        className="rounded-3xl overflow-hidden bg-black shadow-xl"
+        className="rounded-3xl overflow-hidden bg-black shadow-2xl"
       >
         <video
           src={videoUrl}
           controls
-          autoPlay
-          muted
           playsInline
           preload="metadata"
           className="w-full h-full object-contain"
         />
+        {/* <CloudinaryVideoPlayer publicId={video.publicId} /> */}
       </motion.div>
     </motion.div>
   );

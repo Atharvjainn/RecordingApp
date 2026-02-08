@@ -70,7 +70,7 @@ export default function Navbar() {
               <Link href="/" className="hover:text-black transition">
                 HOME
               </Link>
-              <button  onClick={scrolltovideos} className="hover:text-black transition">
+              <button  onClick={scrolltovideos} className="hover:text-black transition cursor-pointer">
                 VIDEOS
               </button>
             </nav>
