@@ -101,7 +101,7 @@ export default function PublicProfilePage({
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent" />
 
                   {/* Duration */}
                   <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-3 py-1 text-xs text-white">

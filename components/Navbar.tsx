@@ -27,10 +27,10 @@ export default function Navbar() {
     }
   }
 
-  useEffect(() => {
-    if(!authUser) checkauth();
+  // useEffect(() => {
+  //   if(!authUser) checkauth();
     
-  }, [checkauth]);
+  // }, [checkauth]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {

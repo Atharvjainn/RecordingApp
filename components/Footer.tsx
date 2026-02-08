@@ -26,7 +26,7 @@ export default function FancyFooter() {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <div className="mx-auto mb-8 grid h-20 w-20 place-items-center rounded-[2rem] bg-red-600 text-white shadow-2xl shadow-red-600/30">
+            <div className="mx-auto mb-8 grid h-20 w-20 place-items-center rounded-4xl bg-red-600 text-white shadow-2xl shadow-red-600/30">
               <Video className="h-10 w-10" strokeWidth={2.5} />
             </div>
 
@@ -75,7 +75,7 @@ export default function FancyFooter() {
             </div>
 
             {/* GIANT WORD */}
-            <div className="pointer-events-none absolute bottom-[-40px] left-1/2 -translate-x-1/2 select-none text-[120px] md:text-[180px] font-black italic leading-none text-white/5">
+            <div className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 select-none text-[120px] md:text-[180px] font-black italic leading-none text-white/5">
               Flow
             </div>
 

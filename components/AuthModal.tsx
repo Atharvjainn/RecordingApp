@@ -148,7 +148,7 @@ export default function AuthModal() {
             {/* SUBMIT */}
             <button
             onClick={() => buttonhandler()}
-            className="mt-2 w-full rounded-xl bg-gradient-to-r from-black to-red-600 py-3 text-sm font-semibold text-white shadow-lg transition cursor-pointer
+            className="mt-2 w-full rounded-xl bg-linear-to-r from-black to-red-600 py-3 text-sm font-semibold text-white shadow-lg transition cursor-pointer
                         hover:from-black hover:to-red-700
                         active:scale-[0.98]"
             >
