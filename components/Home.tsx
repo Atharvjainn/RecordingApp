@@ -96,7 +96,7 @@ function CinematicActionInline({ onStart }: { onStart: () => void }) {
 
             <button
               onClick={onStart}
-              className="h-16 px-12 rounded-full bg-black text-white text-lg font-black uppercase tracking-widest flex items-center gap-4 shadow-2xl hover:scale-[1.03] transition"
+              className="h-16 px-12 rounded-full bg-black text-white text-lg font-black uppercase tracking-widest flex items-center gap-4 shadow-2xl hover:scale-[1.03] transition cursor-pointer"
             >
               Start Recording
               <span className="h-3 w-3 rounded-full bg-red-500 animate-pulse" />
