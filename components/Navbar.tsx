@@ -5,13 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronDown, LogOut, User, VideoIcon } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { userProfileUrl } from "@/lib/utils";
 import AuthModal from "./AuthModal";
 import { useUiStore } from "@/store/useUiStore";
 
 export default function Navbar() {
   const router = useRouter();
-  const { authUser, signOut, checkauth } = useAuthStore();
+  const { authUser, signOut } = useAuthStore();
   const { activeModal, open } = useUiStore();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -65,15 +64,17 @@ export default function Navbar() {
 
             {/* CENTER LINKS */}
             <nav className="hidden md:flex items-center gap-10 text-xs font-semibold tracking-widest text-slate-500">
-              <Link href="/dashboard" className="hover:text-black transition">
+              {authUser &&
+                <Link href="/dashboard" className="hover:text-black transition">
                 DASHBOARD
               </Link>
-              <Link href="/" className="hover:text-black transition">
+              }
+              {authUser && <Link href="/" className="hover:text-black transition">
                 HOME
-              </Link>
-              <button  onClick={scrolltovideos} className="hover:text-black transition cursor-pointer">
+              </Link>}
+              {authUser && <button  onClick={scrolltovideos} className="hover:text-black transition cursor-pointer">
                 VIDEOS
-              </button>
+              </button>}
             </nav>
 
             {/* RIGHT ACTIONS */}
